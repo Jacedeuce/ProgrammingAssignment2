@@ -24,14 +24,14 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, y = NULL, ...) { ## Return a matrix that is the inverse of 'x', optionally can pass original matrix to test for changes(y)
     if(!is.null(y)){  ## sets y to be an optional argument
-        if(is.matrix(y)){
-            if(!identical(x$getmatrix(), y)){
+        if(is.matrix(y)){  ## ensures that optional y is matrix
+            if(!identical(x$getmatrix(), y)){  ## checks for matrix changes and updates inverse if there are any
               x$setmatrix(y)
+              message("Matrix has changed, recalculating inverse.")
             }
         }
         else{
-            message("'y' must be a matrix")
-            stop
+            message("'y' must be a matrix, using previous cache.") ## warning if optional argument is not a matrix
         }
     }
         
